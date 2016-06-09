@@ -1,2 +1,1 @@
-# restjoke
-A simple REST service that serves up jokes.  Slack endpoint included.
+Bryson's first Spring Boot app (kind of)
