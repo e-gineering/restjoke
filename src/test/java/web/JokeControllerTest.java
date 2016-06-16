@@ -59,8 +59,8 @@ public class JokeControllerTest {
 						ChuckNorrisDatabaseJoke.class)).thenReturn(myDBJoke);
 		Joke result = jokeController.getJoke();
 		assertEquals(result.getJoke(), myJoke.getJoke());
-		log.info("Joke object expected: " + myJoke);
-		log.info("Joke object returned: " + result);
+		log.info("\nJoke object expected:\n " + myJoke);
+		log.info("\nJoke object returned:\n " + result);
 	}
 
 	@Test
@@ -72,8 +72,8 @@ public class JokeControllerTest {
 				.postJoke(Application.expectedToken);
 		assertEquals(result, new ResponseEntity<String>(myJoke.toString(),
 				HttpStatus.OK));
-		log.info("Joke object expected for correct token: " + myJoke);
-		log.info("Joke object returned for correct token: " + result);
+		log.info("\nJoke object expected for correct token:\n " + myJoke);
+		log.info("\nJoke object returned for correct token:\n " + result);
 	}
 
 	@Test
@@ -82,7 +82,7 @@ public class JokeControllerTest {
 					.postJoke("888awfeihfuw");
 			assertEquals(result, new ResponseEntity<String>(
 					HttpStatus.UNAUTHORIZED));
-			log.info("Joke object expected for incorrect token: ");
-			log.info("Joke object returned: " + result);
+			log.info("\nJoke object expected for incorrect token:\n <401 Unauthorized,{}> ");
+			log.info("\nJoke object returned:\n " + result);
 	}
 }
