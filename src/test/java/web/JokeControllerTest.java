@@ -1,6 +1,6 @@
 package web;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -10,22 +10,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
-import domain.Joke;
 import domain.ChuckNorrisDatabaseJoke;
+import domain.Constants;
+import domain.Joke;
 import domain.Value;
-
-/**
- * 
- * @author Bryson
- * @since 05/24/16 date last modified 06/01/16
- *
- */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MockServletContext.class)
@@ -47,7 +43,7 @@ public class JokeControllerTest {
 				restTemplate);
 		Value myValue = new Value();
 		myValue.setId((long) 56);
-		myValue.setJoke("This test may pass, but Chuck Norris cannot be tested by conventional means.");
+		myValue.setText("This test may pass, but Chuck Norris cannot be tested by conventional means.");
 		myDBJoke = new ChuckNorrisDatabaseJoke();
 		myDBJoke.setType("success");
 		myDBJoke.setValue(myValue);
@@ -58,14 +54,34 @@ public class JokeControllerTest {
 	@Test
 	public void testGetJoke() throws Exception {
 		Mockito.when(
-				restTemplate
-						.getForObject(
-								"https://api.icndb.com/jokes/random?exclude=[explicit]",
-								ChuckNorrisDatabaseJoke.class)).thenReturn(myDBJoke);
+				restTemplate.getForObject(Constants.API_URL,
+						ChuckNorrisDatabaseJoke.class)).thenReturn(myDBJoke);
 		Joke result = jokeController.getJoke();
-		assertEquals(result.getContents(), myDBJoke.getValue().getJoke());
+		assertEquals(result.getJoke(), myJoke.getJoke());
 		log.info("Joke object expected: " + myJoke);
 		log.info("Joke object returned: " + result);
-		log.info("Joke Controller Test Passed");
+	}
+
+	@Test
+	public void testPostJokeGoodToken() throws Exception {
+		Mockito.when(
+				restTemplate.getForObject(Constants.API_URL,
+						ChuckNorrisDatabaseJoke.class)).thenReturn(myDBJoke);
+		ResponseEntity<String> result = jokeController
+				.postJoke(Application.expectedToken);
+		assertEquals(result, new ResponseEntity<String>(myJoke.toString(),
+				HttpStatus.OK));
+		log.info("Joke object expected for correct token: " + myJoke);
+		log.info("Joke object returned for correct token: " + result);
+	}
+
+	@Test
+	public void testPostJokeBadToken() throws Exception {
+			ResponseEntity<String> result = jokeController
+					.postJoke("888awfeihfuw");
+			assertEquals(result, new ResponseEntity<String>(
+					HttpStatus.UNAUTHORIZED));
+			log.info("Joke object expected for incorrect token: ");
+			log.info("Joke object returned: " + result);
 	}
 }

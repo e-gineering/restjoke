@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	$("#jokeButton").click(function() {
 		$.ajax({
 			url : "http://localhost:8080/joke",
-			success : function(data) { $('.joke-content').html(data.contents); }});
+			success : function(joke) { $('.joke-text').html(joke.joke); }});
 	});
 });
 </script>
@@ -19,7 +19,7 @@ $( document ).ready(function() {
 
 	<button type="button" id="jokeButton">New Joke</button>
 	<div id="joke">
-		<p class="joke-content">Jokes go here</p>
+		<p class="joke-text">Jokes go here</p>
 	</div>
 
 </body>

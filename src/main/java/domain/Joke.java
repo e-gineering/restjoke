@@ -1,13 +1,17 @@
 package domain;
 
 public class Joke {
-	private String contents;
+	private String joke;
 	
-	public Joke(String contents) {
-		this.contents = contents;
+	public Joke(String joke) {
+		this.joke = joke;
 	}
 	
-	public String getContents() {
-		return this.contents;
+	public String getJoke() {
+		return this.joke;
 	}
+	@Override
+	public String toString() {
+		return "{\n\"text\": \"" + this.getJoke() + "\"\n}";
+		}
 }

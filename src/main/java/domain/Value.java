@@ -1,13 +1,10 @@
 package domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * 
- * @author Bryson
- *  Class needed to embed the inner contents of the joke itself
- *         (https://spring.io/guides/gs/consuming-rest/)
+ * Class needed to embed the inner contents of the joke itself
+ * (https://spring.io/guides/gs/consuming-rest/)
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Value {
@@ -29,14 +26,14 @@ public class Value {
 		return this.joke;
 	}
 
-	public void setJoke(String joke) {
+	public void setText(String joke) {
 		this.joke = joke;
 	}
 
 	// from https://spring.io/guides/gs/consuming-rest/
 	@Override
 	public String toString() {
-		return "Value{" + "id='" + id + '\'' + ", joke=" + joke + '}';
+		return "Value{" + "id='" + id + '\'' + ", joke=" + this.joke + '}';
 	}
 
 }
