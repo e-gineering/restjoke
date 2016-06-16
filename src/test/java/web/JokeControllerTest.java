@@ -39,6 +39,7 @@ public class JokeControllerTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		jokeController = new JokeController();
+		Application.expectedToken = "testToken";
 		ReflectionTestUtils.setField(jokeController, "restTemplate",
 				restTemplate);
 		Value myValue = new Value();
