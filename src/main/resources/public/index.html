@@ -9,7 +9,7 @@
 $( document ).ready(function() {
 	$("#jokeButton").click(function() {
 		$.ajax({
-			url : "http://localhost:8080/joke",
+			url : "/joke",
 			success : function(joke) { $('.joke-text').html(joke.joke); }});
 	});
 });
