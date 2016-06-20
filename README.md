@@ -14,7 +14,7 @@ __Channel__: Any
 
 __Trigger Words__: chucknorris (this will allow upper- and lowercase anywhere in the word, i.e. chuCkNorris will be accepted)
 
-__URL__: https://rest-joke.herokuapp.com/joke (or wherever the service is being deployed)
+__URL__: URL of your service endpoint
 
 __Token__: _Caution!_ This value should be changed during initial set up only:
   
