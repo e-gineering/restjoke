@@ -9,7 +9,7 @@ Navigation
 5. If a Chuck Norris Configuration isn't already present, click the _Add Configuration button_, and follow the set-up instructions below. If one does exist, then just click on the edit button to the right of the current Chuck Norris configuration.
 
 The settings for the service should be as follows:
-==================================================
+-------------------------------------------------
 __Channel__: Any
 
 __Trigger Words__: chucknorris (this will allow upper- and lowercase anywhere in the word, i.e. chuCkNorris will be accepted)
